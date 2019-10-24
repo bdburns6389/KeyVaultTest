@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using KeyVaultTest.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -31,6 +32,9 @@ namespace KeyVaultTest
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.AddOptions();
+
+            services.Configure<AppSettings>(options => Configuration.GetSection("AppSettings").Bind(options));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
